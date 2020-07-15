@@ -11,15 +11,14 @@ public class Movie extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     public String name;
-    //@ManyToOne
-    //@JoinColumn(name = "categoryName")
-    public String movieCategory;
+    
+    @ManyToOne
+    @JoinColumn(name = "categoryName")
+    public MovieCategory movieCategory;
 
-    public Movie() {
+    public Movie() {}
 
-    }
-
-    public Movie(String name, String movieCategory) {
+    public Movie(String name, MovieCategory movieCategory) {
         this.name = name;
         this.movieCategory = movieCategory;
     }
@@ -40,11 +39,11 @@ public class Movie extends PanacheEntityBase {
         this.name = name;
     }
 
-    public String getMovieCategory() {
+    public MovieCategory getMovieCategory() {
         return movieCategory;
     }
 
-    public void setMovieCategory(String movieCategory) {
+    public void setMovieCategory(MovieCategory movieCategory) {
         this.movieCategory = movieCategory;
     }
 

@@ -1,6 +1,7 @@
 package com.unifun.endpoints;
 
 import com.unifun.tables.Movie;
+import com.unifun.tables.MovieCategory;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
@@ -19,7 +20,7 @@ public class MovieEndPoint {
     @Path("add")
     @Transactional
     public String addMovie(@QueryParam("name") String name, @QueryParam("movieCategory") String movieCategory) {
-        Movie movie = new Movie(name, movieCategory);
+        Movie movie = new Movie(name, new MovieCategory(movieCategory));
 
         movie.persist();
 
@@ -36,7 +37,7 @@ public class MovieEndPoint {
             return "Record don't exist in database.";
 
         movie.name = name;
-        movie.movieCategory = movieCategory;
+        movie.movieCategory = new MovieCategory(movieCategory);
 
         return "Record updated";
     }
